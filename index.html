@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<body>
+	<h1>real time data recieved from server</h1>
+	<p>When you insert a new row into database, the below p tag content will be changed</p>
+	<p id="socketio"></p>
+</body>
+<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+<script>
+	var socket = io.connect('http://localhost');
+	socket.on('update', function (data) {
+		var data_got=JSON.parse(data.payload)
+		console.log(data_got["data"]["id"]);
+		document.getElementById("socketio").innerHTML = data.payload;
+	});
+</script>
+</html>
